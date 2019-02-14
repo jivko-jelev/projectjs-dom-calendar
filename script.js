@@ -220,7 +220,7 @@ Calendar.prototype.changeDate = function () {
         }
     }
     this.setClickOnDays();
-    if (this.weekMonthView === 'week') {
+    if (this.view === 'calendar') {
         this.printWeekMonthView();
     }
 }
