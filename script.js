@@ -79,8 +79,9 @@ Calendar.prototype.printWeekMonthView = function () {
 };
 
 //Инициализирането на календара/дейтпикъра. Създаване на събития за работата му.
-//Ако трябва да се закачи към Input елемент, променям стиловете на календара като размер, сянката
-//около него и го позиционирам точно под Input елемента към който е закачен.
+//Ако е закачен към Input елемент, променям стиловете на обекта като размер, сянката
+//около него и при влизане в конкретния Input, визуализирам дейтпикъра точно под него.
+//При загуба на фокуса от Input-а скривам дейтпикъра
 function Calendar(element) {
     var root = query(element);
     if (root.nodes[0].nodeName === 'INPUT') {
@@ -608,8 +609,3 @@ query.prototype.on = function (type, event, index = 0) {
     this.nodes[index].addEventListener(type, event);
     return this;
 }
-
-
-
-
-
