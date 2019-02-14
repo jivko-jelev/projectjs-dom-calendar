@@ -227,6 +227,19 @@ Calendar.prototype.changeDate = function () {
     }
 }
 
+function showEventsForDate(date) {
+    var text = '';
+    var count=1;
+    for (let i = 0; i < events.length; i++) {
+        if (equalDates(new Date(date.split('.')[2], date.split('.')[1]-1, date.split('.')[0]), events[i].date)) {
+            if(text===''){
+                text+='Events for date ' + date + ' are:\n';
+            }
+            text += (count++) + '. ' + events[i].title;
+        }
+    }
+    return text === '' ? 'There are no events for this date!' : text;
+}
 
 // Създаване на събития за кликане върху датите. Ако е дейтпикър и се кликне върху определена дата
 // тя се добавя като текст в Input елемента. Ако е календар, при кликане върху дата се показва
@@ -249,6 +262,11 @@ Calendar.prototype.setClickOnDays = function () {
                     'title': input
                 });
                 query('#have-event-' + i).insertAdjacentHTML('beforeend', '<div class="event all-day begin end" title="' + input + '">' + input + '</div>');
+            }));
+            clickOnDays.push(query('#day-' + i).on('contextmenu', function (e) {
+                e.preventDefault();
+                var date = query('#hidden-date-' + (i + 1)).getAttribute('value');
+                alert(showEventsForDate(date));
             }));
         } else {
             clickOnDays.push(query('#day-' + i).on('click', function (e) {
