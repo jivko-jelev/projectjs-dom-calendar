@@ -235,7 +235,7 @@ function showEventsForDate(date) {
             if(text===''){
                 text+='Events for date ' + date + ' are:\n';
             }
-            text += (count++) + '. ' + events[i].title;
+            text += (count++) + '. ' + events[i].title + '\n';
         }
     }
     return text === '' ? 'There are no events for this date!' : text;

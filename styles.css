@@ -309,3 +309,11 @@ select {
     font-style: italic;
     float: right;
 }
+
+.container {
+    margin-bottom: 20px;
+}
+
+#previous-week, #next-week {
+    cursor: pointer;
+}
