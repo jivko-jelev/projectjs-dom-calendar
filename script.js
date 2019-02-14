@@ -426,10 +426,10 @@ Calendar.prototype.daysForMonth = function (year, month) {
             text += '<tr class="week">';
         }
         text += '                <td class="calendar-day outside" id="day-' + dayNum++ + '">\n' +
-            '<input id="hidden-date-' + dayNum + '" type="hidden" value="' + pad(previousMonth + i + 1) + '.' + pad(_month + 1) + '.' + year + '">' +
+            '<input id="hidden-date-' + dayNum + '" type="hidden" value="' + pad(previousMonth + i + 1) + '.' + pad(_month + 1) + '.' + _year + '">' +
             '                    <span class="date">' + (previousMonth + i + 1) + '</span>\n' +
             '<div id="have-event-' + (dayNum - 1) + '">';
-        text += printEventsForDate(new Date(_year, _month, previousMonth)) +
+        text += printEventsForDate(new Date(_year, _month, previousMonth+ i + 1)) +
             '</div></td>\n';
         col++;
     }
