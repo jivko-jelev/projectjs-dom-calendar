@@ -248,7 +248,7 @@ Calendar.prototype.setClickOnDays = function () {
                     'date': date,
                     'title': input
                 });
-                query('#have-event-' + i).insertAdjacentHTML('beforeend', '<div class="event all-day begin end" title="All Day Event">' + input + '</div>');
+                query('#have-event-' + i).insertAdjacentHTML('beforeend', '<div class="event all-day begin end" title="' + input + '">' + input + '</div>');
             }));
         } else {
             clickOnDays.push(query('#day-' + i).on('click', function (e) {
@@ -384,7 +384,7 @@ function printEventsForDate(date) {
     var text = '';
     for (let i = 0; i < events.length; i++) {
         if (equalDates(date, events[i].date) === true) {
-            text += '<div class="event all-day begin end" title="All Day Event">' + events[i].title + '</div>';
+            text += '<div class="event all-day begin end" title="' + events[i].title + '">' + events[i].title + '</div>';
         }
     }
     return text;
