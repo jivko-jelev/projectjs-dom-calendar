@@ -6,7 +6,7 @@ function Event(date, event) {
     this.event = event;
 }
 
-//Връща име на месец със зададен индекс. С възможност за връщане само на 1-вите 3 букви от името
+// Връща име на месец със зададен индекс. С възможност за връщане само на 1-вите 3 букви от името
 function getMonthName(month, short = false) {
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
@@ -17,7 +17,7 @@ function getTitle(month, year) {
     return getMonthName(month) + ' ' + year;
 }
 
-//Изписването на select-а за избор на месец
+// Изписването на select-а за избор на месец
 function printSelectMonth(month) {
     var text = '<select class="form-control input-sm select-month" name="select-month" id="select-month">';
     for (let i = 0; i < 12; i++) {
@@ -27,7 +27,8 @@ function printSelectMonth(month) {
     return text;
 }
 
-//Изписването на select-а за избор на година
+// Изписването на select-а за избор на година. Годината, която е активна в календара е в средата
+// на списъка, като под и над нея има по 5 години. При смяна на годината, това се актуализира
 function printSelectYear(year) {
     var text = '';
     for (let i = year - 5; i < year + 6; i++) {
@@ -36,8 +37,8 @@ function printSelectYear(year) {
     return text;
 }
 
-//Смяна на изгледа от седмичен към месечен и обратно. Скриване на бутоните за следваща и предишна
-//седмица, ако бъде избран изглед по месеци
+// Смяна на изгледа от седмичен към месечен и обратно. Скриване на бутоните за следваща и предишна
+// седмица, ако бъде избран изглед по месеци
 Calendar.prototype.printWeekMonthView = function () {
     if (this.weekMonthView === 'week') {
         query('#week-month-view').innerHTML(
@@ -78,10 +79,10 @@ Calendar.prototype.printWeekMonthView = function () {
     }
 };
 
-//Инициализирането на календара/дейтпикъра. Създаване на събития за работата му.
-//Ако е закачен към Input елемент, променям стиловете на обекта като размер, сянката
-//около него и при влизане в конкретния Input, визуализирам дейтпикъра точно под него.
-//При загуба на фокуса от Input-а скривам дейтпикъра
+// Инициализирането на календара/дейтпикъра. Създаване на събития за работата му.
+// Ако е закачен към Input елемент, променям стиловете на обекта като размер, сянката
+// около него и при влизане в конкретния Input, визуализирам дейтпикъра точно под него.
+// При загуба на фокуса от Input-а скривам дейтпикъра
 function Calendar(element) {
     var root = query(element);
     if (root.nodes[0].nodeName === 'INPUT') {
@@ -207,7 +208,7 @@ function Calendar(element) {
 }
 
 
-//Опресняване на информацията на календара/дейтпикъра при смяна на седмица, месец или година
+// Опресняване на информацията на календара/дейтпикъра при смяна на седмица, месец или година
 Calendar.prototype.changeDate = function () {
     query('.month-year-title').innerHTML(getTitle(this.month, this.year) + '<div id="week-month-view"></div>');
     query('.month-title').innerHTML(getMonthName(this.month, true));
@@ -227,9 +228,9 @@ Calendar.prototype.changeDate = function () {
 }
 
 
-//Създаване на събития за кликане върху датите. Ако е дейтпикър и се кликне върху определена дата
-//тя се добавя като текст в Input елемента. Ако е календар, при кликане върху дата се показва
-//прозорец който пита какво събитие да се добави за съответната дата
+// Създаване на събития за кликане върху датите. Ако е дейтпикър и се кликне върху определена дата
+// тя се добавя като текст в Input елемента. Ако е календар, при кликане върху дата се показва
+// прозорец който пита какво събитие да се добави за съответната дата
 Calendar.prototype.setClickOnDays = function () {
     clickOnDays = [];
     for (let i = 0; i < this.numDaysInCalendar; i++) {
@@ -258,7 +259,7 @@ Calendar.prototype.setClickOnDays = function () {
     }
 }
 
-//Смяна на месеца и опресняване на информацията на календара/дейтпикъра
+// Смяна на месеца и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.changeMonth = function (month) {
     if (month >= 0 && month <= 11) {
         this.month = parseInt(month);
@@ -266,13 +267,13 @@ Calendar.prototype.changeMonth = function (month) {
     }
 }
 
-//Смяна на годината по зададена такава и опресняване на информацията на календара/дейтпикъра
+// Смяна на годината по зададена такава и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.changeYear = function (year) {
     this.year = parseInt(year);
     this.changeDate();
 }
 
-//Смяна на месеца със следващия и опресняване на информацията на календара/дейтпикъра
+// Смяна на месеца със следващия и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showNextMonth = function () {
     if (this.month === 11) {
         this.month = 0;
@@ -283,7 +284,7 @@ Calendar.prototype.showNextMonth = function () {
     this.changeDate();
 }
 
-//Смяна на мецеца с предишния такъв и опресняване на информацията на календара/дейтпикъра
+// Смяна на мецеца с предишния такъв и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showPreviousMonth = function () {
     if (this.month === 0) {
         this.month = 11;
@@ -294,7 +295,7 @@ Calendar.prototype.showPreviousMonth = function () {
     this.changeDate();
 }
 
-//Смяна на седмицата със следващата такава и опресняване на информацията на календара/дейтпикъра
+// Смяна на седмицата със следващата такава и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showNextWeek = function () {
     var _calendar = this;
     var week = query('.week');
@@ -321,7 +322,7 @@ function daysInMonth(year, month) {
     return new Date(now.getFullYear(), now.getMonth() + 1, 0);
 }
 
-//Смяна на седмицата с предишната такава и опресняване на информацията на календара/дейтпикъра
+// Смяна на седмицата с предишната такава и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showPreviousWeek = function () {
     var _calendar = this;
     var week = query('.week');
@@ -347,17 +348,17 @@ Calendar.prototype.showPreviousWeek = function () {
     }
 }
 
-//Смяна на годината със следващата такава и опресняване на информацията на календара/дейтпикъра
+// Смяна на годината със следващата такава и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showNextYear = function () {
     this.changeYear(++this.year);
 }
 
-//Смяна на годината с предишната такава и опресняване на информацията на календара/дейтпикъра
+// Смяна на годината с предишната такава и опресняване на информацията на календара/дейтпикъра
 Calendar.prototype.showPreviousYear = function () {
     this.changeYear(--this.year);
 }
 
-//Проверка дали конкретна дата е равна на днешната
+// Проверка дали конкретна дата е равна на днешната
 function isCurrentDate(year, month, date) {
     var today = new Date();
     return (today.getFullYear() === new Date(year, month).getFullYear() &&
@@ -365,7 +366,7 @@ function isCurrentDate(year, month, date) {
             (today.getDate() === new Date(year, month, date).getDate()))) === true;
 }
 
-//Сравняване на 2 дати дали са равни
+// Сравняване на 2 дати дали са равни
 function equalDates(date1, date2) {
     return date1.getFullYear() === date2.getFullYear() &&
         date1.getMonth() === date2.getMonth() &&
