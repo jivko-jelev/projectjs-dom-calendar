@@ -103,7 +103,7 @@ function Calendar(element) {
         '<i class="fa fa-chevron-circle-right fa-lg" id="next-month" aria-hidden="true"></i>' +
         printSelectMonth(this.month) +
         '</div>\n' +
-        '<div class="center col-md-4 month-year-title" id="middle-div">' + getTitle(this.month, this.year) +
+        '<div class="my-row center col-md-4 month-year-title" id="middle-div">' + getTitle(this.month, this.year) +
         '<div id="week-month-view"></div>' +
         '</div>\n' +
         '<div class="my-row year col-md-4 pull-right" id="right-div">\n' +
@@ -159,6 +159,7 @@ function Calendar(element) {
             }
             if (e.target.id !== 'holder' && e.target.id !== _convertedName &&
                 e.target.id !== 'next-month' && e.target.id !== 'previous-month' &&
+                e.target.id !== 'month-year-title' &&
                 e.target.id !== 'select-year' && e.target.id !== 'select-month' &&
                 e.target.id !== 'next-year' && e.target.id !== 'previous-year' &&
                 e.target.id !== 'datetime-holder' && e.target.id !== 'left-div' &&
@@ -271,7 +272,7 @@ Calendar.prototype.setClickOnDays = function () {
         } else {
             clickOnDays.push(query('#day-' + i).on('click', function (e) {
                 query('#holder').css('display', 'none');
-                query(_calendar.root).setAttr('value', query('#hidden-date-' + (i + 1)).getAttribute('value'));
+                query(_calendar.root).setValue(query('#hidden-date-' + (i + 1)).getAttribute('value'));
             }));
         }
     }
@@ -391,7 +392,7 @@ function equalDates(date1, date2) {
         date1.getDate() === date2.getDate()
 }
 
-// Използвам го за добавяне на водеща нула към дните и месеците по-малки от 9,
+// Използвам го за добавяне на водеща нула към дните и месеците по-малки от 10,
 // за да се получи дата във формата 14.02.2019, вместо 14.2.2019
 function pad(number) {
     return number > 9 ? number : '0' + number;
